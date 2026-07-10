@@ -57,7 +57,7 @@ export default function ExportPanel({
     <div className="flex flex-col gap-3">
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="flex flex-col gap-1">
-          <label htmlFor="export-name" className="text-sm font-medium text-stone-700">
+          <label htmlFor="export-name" className="text-sm font-medium text-stone-700 dark:text-stone-300">
             Recipe name
           </label>
           <input
@@ -66,12 +66,12 @@ export default function ExportPanel({
             value={name}
             onChange={(e) => onNameChange(e.target.value)}
             placeholder="My Sourdough"
-            className="rounded-lg border border-stone-300 bg-white px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+            className="rounded-lg border border-stone-300 bg-white px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label htmlFor="export-desc" className="text-sm font-medium text-stone-700">
-            Description <span className="text-stone-400">(optional)</span>
+          <label htmlFor="export-desc" className="text-sm font-medium text-stone-700 dark:text-stone-300">
+            Description <span className="text-stone-400 dark:text-stone-500">(optional)</span>
           </label>
           <input
             id="export-desc"
@@ -79,12 +79,12 @@ export default function ExportPanel({
             value={description}
             onChange={(e) => onDescriptionChange(e.target.value)}
             placeholder="~2 loaves"
-            className="rounded-lg border border-stone-300 bg-white px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+            className="rounded-lg border border-stone-300 bg-white px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
           />
         </div>
       </div>
 
-      <pre className="max-h-64 overflow-auto rounded-lg bg-stone-900 p-4 text-xs leading-relaxed text-stone-100">
+      <pre className="max-h-64 overflow-auto rounded-lg bg-stone-900 p-4 text-xs leading-relaxed text-stone-100 dark:bg-stone-950 dark:ring-1 dark:ring-stone-800">
         <code>{json}</code>
       </pre>
 
@@ -96,10 +96,10 @@ export default function ExportPanel({
         >
           Copy JSON
         </button>
-        {copied && <span className="text-sm font-medium text-green-600">Copied!</span>}
-        <span className="text-sm text-stone-400">
-          Paste this into <code className="text-stone-500">src/data/recipes.json</code> inside
-          the <code className="text-stone-500">"recipes"</code> array.
+        {copied && <span className="text-sm font-medium text-green-600 dark:text-green-400">Copied!</span>}
+        <span className="text-sm text-stone-400 dark:text-stone-500">
+          Paste this into <code className="text-stone-500 dark:text-stone-400">src/data/recipes.json</code> inside
+          the <code className="text-stone-500 dark:text-stone-400">"recipes"</code> array.
         </span>
       </div>
     </div>

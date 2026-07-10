@@ -51,7 +51,7 @@ export default function BreadCalculator() {
 
   return (
     <div className="flex flex-col gap-8">
-      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
         <div className="grid gap-6 sm:grid-cols-2">
           <RecipeSelect
             recipes={recipes}
@@ -61,12 +61,12 @@ export default function BreadCalculator() {
           <MultiplierControl multiplier={multiplier} onChange={setMultiplier} />
         </div>
         {selectedRecipe?.description && (
-          <p className="mt-4 text-sm text-stone-500">{selectedRecipe.description}</p>
+          <p className="mt-4 text-sm text-stone-500 dark:text-stone-400">{selectedRecipe.description}</p>
         )}
       </section>
 
-      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-stone-800">Ingredients</h2>
+      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+        <h2 className="mb-4 text-lg font-semibold text-stone-800 dark:text-stone-200">Ingredients</h2>
         <IngredientTable
           ingredients={ingredients}
           multiplier={multiplier}
@@ -76,9 +76,9 @@ export default function BreadCalculator() {
         />
       </section>
 
-      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-1 text-lg font-semibold text-stone-800">Export recipe</h2>
-        <p className="mb-4 text-sm text-stone-500">
+      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+        <h2 className="mb-1 text-lg font-semibold text-stone-800 dark:text-stone-200">Export recipe</h2>
+        <p className="mb-4 text-sm text-stone-500 dark:text-stone-400">
           Save your current ingredients (at base weights) as a new recipe.
         </p>
         <ExportPanel

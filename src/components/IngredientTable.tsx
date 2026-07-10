@@ -33,7 +33,7 @@ export default function IngredientTable({
     <div className="overflow-x-auto">
       <table className="w-full border-collapse text-sm">
         <thead>
-          <tr className="border-b border-stone-200 text-left text-stone-500">
+          <tr className="border-b border-stone-200 text-left text-stone-500 dark:border-stone-800 dark:text-stone-400">
             <th className="py-2 pr-2 font-medium">Ingredient</th>
             <th className="w-16 py-2 px-2 text-center font-medium">Flour?</th>
             <th className="w-24 py-2 px-2 text-right font-medium">Base (g)</th>
@@ -45,20 +45,20 @@ export default function IngredientTable({
         <tbody>
           {ingredients.length === 0 && (
             <tr>
-              <td colSpan={6} className="py-6 text-center text-stone-400">
+              <td colSpan={6} className="py-6 text-center text-stone-400 dark:text-stone-500">
                 No ingredients — add one below.
               </td>
             </tr>
           )}
           {ingredients.map((ing, index) => (
-            <tr key={index} className="border-b border-stone-100">
+            <tr key={index} className="border-b border-stone-100 dark:border-stone-800">
               <td className="py-1.5 pr-2">
                 <input
                   type="text"
                   value={ing.name}
                   placeholder="Ingredient name"
                   onChange={(e) => onUpdate(index, { name: e.target.value })}
-                  className="w-full rounded-md border border-transparent bg-transparent px-2 py-1 hover:border-stone-200 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                  className="w-full rounded-md border border-transparent bg-transparent px-2 py-1 hover:border-stone-200 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:hover:border-stone-700 dark:focus:bg-stone-800"
                 />
               </td>
               <td className="py-1.5 px-2 text-center">
@@ -77,13 +77,13 @@ export default function IngredientTable({
                   step="any"
                   value={ing.grams}
                   onChange={(e) => onUpdate(index, { grams: Number(e.target.value) })}
-                  className="w-20 rounded-md border border-transparent bg-transparent px-2 py-1 text-right hover:border-stone-200 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+                  className="w-20 rounded-md border border-transparent bg-transparent px-2 py-1 text-right hover:border-stone-200 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:hover:border-stone-700 dark:focus:bg-stone-800"
                 />
               </td>
-              <td className="py-1.5 px-2 text-right font-medium text-stone-900 tabular-nums">
+              <td className="py-1.5 px-2 text-right font-medium text-stone-900 tabular-nums dark:text-stone-100">
                 {formatGrams((ing.grams || 0) * multiplier)}
               </td>
-              <td className="py-1.5 px-2 text-right text-stone-500 tabular-nums">
+              <td className="py-1.5 px-2 text-right text-stone-500 tabular-nums dark:text-stone-400">
                 {bakersPercent(ing.grams || 0)}
               </td>
               <td className="py-1.5 pl-2 text-right">
@@ -91,7 +91,7 @@ export default function IngredientTable({
                   type="button"
                   onClick={() => onRemove(index)}
                   aria-label="Remove ingredient"
-                  className="rounded-md px-2 py-1 text-stone-400 hover:bg-red-50 hover:text-red-600"
+                  className="rounded-md px-2 py-1 text-stone-400 hover:bg-red-50 hover:text-red-600 dark:text-stone-500 dark:hover:bg-red-950/40 dark:hover:text-red-400"
                 >
                   ✕
                 </button>
@@ -100,7 +100,7 @@ export default function IngredientTable({
           ))}
         </tbody>
         <tfoot>
-          <tr className="border-t-2 border-stone-200 font-medium text-stone-700">
+          <tr className="border-t-2 border-stone-200 font-medium text-stone-700 dark:border-stone-700 dark:text-stone-300">
             <td className="py-2 pr-2">Total dough</td>
             <td />
             <td className="py-2 px-2 text-right tabular-nums">{formatGrams(totalDough)}</td>
@@ -112,7 +112,7 @@ export default function IngredientTable({
             </td>
             <td />
           </tr>
-          <tr className="text-stone-500">
+          <tr className="text-stone-500 dark:text-stone-400">
             <td className="py-1 pr-2">Total flour</td>
             <td />
             <td className="py-1 px-2 text-right tabular-nums">{formatGrams(totalFlour)}</td>
@@ -130,7 +130,7 @@ export default function IngredientTable({
       <button
         type="button"
         onClick={onAdd}
-        className="mt-3 rounded-lg border border-dashed border-stone-300 px-3 py-2 text-sm font-medium text-stone-600 hover:border-amber-500 hover:text-amber-700"
+        className="mt-3 rounded-lg border border-dashed border-stone-300 px-3 py-2 text-sm font-medium text-stone-600 hover:border-amber-500 hover:text-amber-700 dark:border-stone-700 dark:text-stone-400 dark:hover:border-amber-500 dark:hover:text-amber-400"
       >
         + Add ingredient
       </button>
