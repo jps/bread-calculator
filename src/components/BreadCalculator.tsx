@@ -76,9 +76,24 @@ export default function BreadCalculator() {
         />
       </section>
 
-      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
-        <h2 className="mb-1 text-lg font-semibold text-stone-800 dark:text-stone-200">Export recipe</h2>
-        <p className="mb-4 text-sm text-stone-500 dark:text-stone-400">
+      <details className="group rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+        <summary className="flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
+          <h2 className="text-lg font-semibold text-stone-800 dark:text-stone-200">Export recipe</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+            className="h-5 w-5 text-stone-400 transition-transform duration-200 group-open:rotate-180 dark:text-stone-500"
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </summary>
+        <p className="mt-1 mb-4 text-sm text-stone-500 dark:text-stone-400">
           Save your current ingredients (at base weights) as a new recipe.
         </p>
         <ExportPanel
@@ -88,7 +103,7 @@ export default function BreadCalculator() {
           onNameChange={setName}
           onDescriptionChange={setDescription}
         />
-      </section>
+      </details>
     </div>
   );
 }
