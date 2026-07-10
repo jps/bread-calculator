@@ -1,0 +1,29 @@
+---
+import "../styles/global.css";
+import BreadCalculator from "../components/BreadCalculator.tsx";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/favicon.svg`} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Bread Calculator</title>
+	</head>
+	<body class="min-h-screen bg-stone-50 text-stone-900 antialiased">
+		<main class="mx-auto max-w-3xl px-4 py-10">
+			<header class="mb-8">
+				<h1 class="text-3xl font-bold tracking-tight text-stone-900">🍞 Bread Calculator</h1>
+				<p class="mt-2 text-stone-500">
+					Pick a recipe, scale it up or down, and read off the weights. Baker&apos;s
+					percentages are shown relative to total flour.
+				</p>
+			</header>
+			<BreadCalculator client:load />
+			<footer class="mt-12 text-center text-xs text-stone-400">
+				Base recipes are ~1000g flour (≈2 loaves), Ken Forkish style.
+			</footer>
+		</main>
+	</body>
+</html>

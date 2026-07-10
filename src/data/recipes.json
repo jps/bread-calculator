@@ -1,0 +1,99 @@
+{
+  "recipes": [
+    {
+      "id": "saturday-white",
+      "name": "Saturday White Bread",
+      "description": "Ken Forkish style — instant yeast, ~2 loaves",
+      "ingredients": [
+        { "name": "White flour", "grams": 1000, "isFlour": true },
+        { "name": "Water (32°C)", "grams": 780 },
+        { "name": "Fine sea salt", "grams": 22 },
+        { "name": "Instant yeast", "grams": 4 }
+      ]
+    },
+    {
+      "id": "overnight-country-brown",
+      "name": "Overnight Country Brown",
+      "description": "Ken Forkish style — 90% white / 10% whole wheat, ~2 loaves",
+      "ingredients": [
+        { "name": "White flour", "grams": 900, "isFlour": true },
+        { "name": "Whole wheat flour", "grams": 100, "isFlour": true },
+        { "name": "Water (32°C)", "grams": 780 },
+        { "name": "Fine sea salt", "grams": 21 },
+        { "name": "Instant yeast", "grams": 1 }
+      ]
+    },
+    {
+      "id": "fifty-percent-whole-wheat",
+      "name": "50% Whole Wheat",
+      "description": "Ken Forkish style — hearty half whole-wheat, ~2 loaves",
+      "ingredients": [
+        { "name": "White flour", "grams": 500, "isFlour": true },
+        { "name": "Whole wheat flour", "grams": 500, "isFlour": true },
+        { "name": "Water (32°C)", "grams": 820 },
+        { "name": "Fine sea salt", "grams": 22 },
+        { "name": "Instant yeast", "grams": 4 }
+      ]
+    },
+    {
+      "id": "overnight-country-blonde",
+      "name": "Overnight Country Blonde",
+      "description": "Ken Forkish pure levain — ~90% white / 5% rye / 3% whole wheat, ~2 loaves",
+      "ingredients": [
+        { "name": "White flour", "grams": 804, "isFlour": true },
+        { "name": "Whole rye flour", "grams": 50, "isFlour": true },
+        { "name": "Whole wheat flour", "grams": 26, "isFlour": true },
+        { "name": "Water (32°C)", "grams": 684 },
+        { "name": "Fine sea salt", "grams": 22 },
+        { "name": "Levain (100% hydration)", "grams": 216 }
+      ]
+    },
+    {
+      "id": "field-blend-2",
+      "name": "Field Blend #2",
+      "description": "Ken Forkish levain — 70% white / 12.5% whole wheat / 17.5% rye, ~2 loaves",
+      "ingredients": [
+        { "name": "White flour", "grams": 540, "isFlour": true },
+        { "name": "Whole wheat flour", "grams": 85, "isFlour": true },
+        { "name": "Whole rye flour", "grams": 175, "isFlour": true },
+        { "name": "Water (32°C)", "grams": 620 },
+        { "name": "Fine sea salt", "grams": 21 },
+        { "name": "Instant yeast", "grams": 2 },
+        { "name": "Levain (100% hydration)", "grams": 360 }
+      ]
+    },
+    {
+      "id": "same-day-straight-pizza",
+      "name": "Same-Day Straight Pizza Dough",
+      "description": "Ken Forkish style — 70% hydration, makes five 340g balls (~5 pizzas)",
+      "ingredients": [
+        { "name": "White flour", "grams": 1000, "isFlour": true },
+        { "name": "Water", "grams": 700 },
+        { "name": "Fine sea salt", "grams": 20 },
+        { "name": "Instant yeast", "grams": 2 }
+      ]
+    },
+    {
+      "id": "overnight-straight-pizza",
+      "name": "Overnight Straight Pizza Dough",
+      "description": "Ken Forkish style — 70% hydration, low yeast for overnight rise, makes five 340g balls (~5 pizzas)",
+      "ingredients": [
+        { "name": "White flour", "grams": 1000, "isFlour": true },
+        { "name": "Water", "grams": 700 },
+        { "name": "Fine sea salt", "grams": 20 },
+        { "name": "Instant yeast", "grams": 0.8 }
+      ]
+    },
+    {
+      "id": "overnight-levain-pizza",
+      "name": "Overnight Pizza Dough with Levain",
+      "description": "Ken Forkish style — levain-leavened, makes five 340g balls (~5 pizzas)",
+      "ingredients": [
+        { "name": "White flour", "grams": 900, "isFlour": true },
+        { "name": "Water", "grams": 620 },
+        { "name": "Fine sea salt", "grams": 20 },
+        { "name": "Levain (100% hydration)", "grams": 180 }
+      ]
+    }
+  ]
+}
