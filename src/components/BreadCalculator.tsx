@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import type { Ingredient } from "../types";
 import recipesFile from "../data/recipes.json";
 import RecipeSelect from "./RecipeSelect";
@@ -26,6 +26,34 @@ export default function BreadCalculator() {
   );
   const [name, setName] = useState(selectedRecipe?.name ?? "");
   const [description, setDescription] = useState(selectedRecipe?.description ?? "");
+
+  // Load state on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("bread-calculator-state");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.selectedId) setSelectedId(parsed.selectedId);
+        if (parsed.multiplier !== undefined) setMultiplier(parsed.multiplier);
+        if (parsed.ingredients) setIngredients(parsed.ingredients);
+        if (parsed.name !== undefined) setName(parsed.name);
+        if (parsed.description !== undefined) setDescription(parsed.description);
+      }
+    } catch (e) {
+      console.error("Failed to load state", e);
+    }
+  }, []);
+
+  // Save state on change
+  useEffect(() => {
+    localStorage.setItem("bread-calculator-state", JSON.stringify({
+      selectedId,
+      multiplier,
+      ingredients,
+      name,
+      description
+    }));
+  }, [selectedId, multiplier, ingredients, name, description]);
 
   const handleSelectRecipe = (id: string) => {
     const recipe = recipes.find((r) => r.id === id);
