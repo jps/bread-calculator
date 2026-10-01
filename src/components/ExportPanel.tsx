@@ -27,7 +27,8 @@ function buildRecipeJson(name: string, description: string, ingredients: Ingredi
     ingredients: ingredients.map((i) => ({
       name: i.name,
       grams: i.grams,
-      ...(i.isFlour ? { isFlour: true } : {}),
+      ...(i.isWater ? { isWater: true } : {}),
+      ...(!i.isWater && i.isFlour ? { isFlour: true } : {}),
     })),
   };
   return JSON.stringify(recipe, null, 2);

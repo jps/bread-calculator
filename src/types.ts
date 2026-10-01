@@ -2,6 +2,7 @@ export interface Ingredient {
   name: string;
   grams: number;
   isFlour?: boolean;
+  isWater?: boolean;
 }
 
 export interface Recipe {

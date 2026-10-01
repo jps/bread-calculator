@@ -3,8 +3,8 @@ import type { Ingredient } from "../types";
 interface Props {
   ingredients: Ingredient[];
   multiplier: number;
-  onUpdate: (index: number, patch: Partial<Ingredient>) => void;
-  onRemove: (index: number) => void;
+  onUpdate: (ing: Ingredient, patch: Partial<Ingredient>) => void;
+  onRemove: (ing: Ingredient) => void;
   onAdd: () => void;
 }
 
@@ -50,54 +50,99 @@ export default function IngredientTable({
               </td>
             </tr>
           )}
-          {ingredients.map((ing, index) => (
-            <tr key={index} className="border-b border-stone-100 dark:border-stone-800">
-              <td className="py-1.5 pr-2">
-                <input
-                  type="text"
-                  value={ing.name}
-                  placeholder="Ingredient name"
-                  onChange={(e) => onUpdate(index, { name: e.target.value })}
-                  className="w-full rounded-md border border-transparent bg-transparent px-2 py-1 hover:border-stone-200 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:hover:border-stone-700 dark:focus:bg-stone-800"
-                />
-              </td>
-              <td className="py-1.5 px-2 text-center">
-                <input
-                  type="checkbox"
-                  checked={!!ing.isFlour}
-                  onChange={(e) => onUpdate(index, { isFlour: e.target.checked })}
-                  className="h-4 w-4 accent-amber-600"
-                  aria-label={`${ing.name || "Ingredient"} is flour`}
-                />
-              </td>
-              <td className="py-1.5 px-2 text-right">
-                <input
-                  type="number"
-                  min={0}
-                  step="any"
-                  value={ing.grams}
-                  onChange={(e) => onUpdate(index, { grams: Number(e.target.value) })}
-                  className="w-20 rounded-md border border-transparent bg-transparent px-2 py-1 text-right hover:border-stone-200 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:hover:border-stone-700 dark:focus:bg-stone-800"
-                />
-              </td>
-              <td className="py-1.5 px-2 text-right font-medium text-stone-900 tabular-nums dark:text-stone-100">
-                {formatGrams((ing.grams || 0) * multiplier)}
-              </td>
-              <td className="py-1.5 px-2 text-right text-stone-500 tabular-nums dark:text-stone-400">
-                {bakersPercent(ing.grams || 0)}
-              </td>
-              <td className="py-1.5 pl-2 text-right">
-                <button
-                  type="button"
-                  onClick={() => onRemove(index)}
-                  aria-label="Remove ingredient"
-                  className="rounded-md px-2 py-1 text-stone-400 hover:bg-red-50 hover:text-red-600 dark:text-stone-500 dark:hover:bg-red-950/40 dark:hover:text-red-400"
-                >
-                  ✕
-                </button>
-              </td>
-            </tr>
-          ))}
+          {ingredients.map((ing, index) => {
+            const isWater = !!ing.isWater;
+            const hydrationPercent =
+              totalFlour > 0
+                ? (ing.grams / totalFlour) * 100
+                : 70;
+
+            const handleHydrationChange = (newHydration: number) => {
+              if (totalFlour > 0) {
+                const newGrams = Math.round(((newHydration / 100) * totalFlour) * 10) / 10;
+                onUpdate(ing, { grams: newGrams });
+              }
+            };
+
+            return (
+              <tr key={index} className="border-b border-stone-100 dark:border-stone-800">
+                <td className="py-2 pr-2">
+                  <div className="flex flex-col gap-1.5">
+                    <input
+                      type="text"
+                      value={ing.name}
+                      placeholder="Ingredient name"
+                      onChange={(e) => onUpdate(ing, { name: e.target.value })}
+                      className="w-full rounded-md border border-transparent bg-transparent px-2 py-1 hover:border-stone-200 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:hover:border-stone-700 dark:focus:bg-stone-800"
+                    />
+                    {isWater && (
+                      <div className="flex items-center gap-2.5 px-2 py-1 rounded-lg bg-blue-50/60 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/50">
+                        <label
+                          htmlFor={`hydration-slider-${index}`}
+                          className="text-xs font-semibold text-blue-700 dark:text-blue-300 whitespace-nowrap"
+                        >
+                          Hydration:
+                        </label>
+                        <input
+                          id={`hydration-slider-${index}`}
+                          type="range"
+                          min={0}
+                          max={125}
+                          step={1}
+                          disabled={totalFlour === 0}
+                          value={Math.round(hydrationPercent)}
+                          onChange={(e) => handleHydrationChange(Number(e.target.value))}
+                          className="w-28 sm:w-36 accent-blue-600 cursor-pointer disabled:cursor-not-allowed"
+                        />
+                        <span className="text-xs font-bold text-blue-800 dark:text-blue-200 tabular-nums min-w-[3.5rem]">
+                          {formatGrams(hydrationPercent)}%
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </td>
+                <td className="py-1.5 px-2 text-center">
+                  {!isWater && (
+                    <input
+                      type="checkbox"
+                      checked={!!ing.isFlour}
+                      onChange={(e) => onUpdate(ing, { isFlour: e.target.checked })}
+                      className="h-4 w-4 accent-amber-600"
+                      aria-label={`${ing.name || "Ingredient"} is flour`}
+                    />
+                  )}
+                </td>
+                <td className="py-1.5 px-2 text-right align-top pt-2.5">
+                  <input
+                    type="number"
+                    min={0}
+                    step="any"
+                    value={ing.grams}
+                    onChange={(e) => onUpdate(ing, { grams: Number(e.target.value) })}
+                    className="w-20 rounded-md border border-transparent bg-transparent px-2 py-1 text-right hover:border-stone-200 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:hover:border-stone-700 dark:focus:bg-stone-800"
+                  />
+                </td>
+                <td className="py-1.5 px-2 text-right font-medium text-stone-900 tabular-nums dark:text-stone-100 align-top pt-3.5">
+                  {formatGrams((ing.grams || 0) * multiplier)}
+                </td>
+                <td className="py-1.5 px-2 text-right text-stone-500 tabular-nums dark:text-stone-400 align-top pt-3.5">
+                  {bakersPercent(ing.grams || 0)}
+                </td>
+                <td className="py-1.5 pl-2 text-right align-top pt-2.5">
+                  {!isWater && (
+                    <button
+                      type="button"
+                      onClick={() => onRemove(ing)}
+                      aria-label="Remove ingredient"
+                      className="rounded-md px-2 py-1 text-stone-400 hover:bg-red-50 hover:text-red-600 dark:text-stone-500 dark:hover:bg-red-950/40 dark:hover:text-red-400"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
         <tfoot>
           <tr className="border-t-2 border-stone-200 font-medium text-stone-700 dark:border-stone-700 dark:text-stone-300">
