@@ -35,19 +35,47 @@ export default function BreadCalculator() {
     setDescription(recipe?.description ?? "");
   };
 
-  const updateIngredient = (index: number, patch: Partial<Ingredient>) => {
-    setIngredients((prev) =>
-      prev.map((ing, i) => (i === index ? { ...ing, ...patch } : ing)),
-    );
+  const updateIngredientByRef = (targetIng: Ingredient, patch: Partial<Ingredient>) => {
+    setIngredients((prev) => {
+      let found = false;
+      const updated = prev.map((ing) => {
+        if (ing === targetIng || (ing.isWater && targetIng.isWater)) {
+          found = true;
+          return { ...ing, ...patch };
+        }
+        return ing;
+      });
+      if (!found && targetIng.isWater) {
+        return [{ ...targetIng, ...patch }, ...prev];
+      }
+      return updated;
+    });
   };
 
-  const removeIngredient = (index: number) => {
-    setIngredients((prev) => prev.filter((_, i) => i !== index));
+  const removeIngredientByRef = (targetIng: Ingredient) => {
+    if (targetIng.isWater) return; // Never remove water
+    setIngredients((prev) => prev.filter((ing) => ing !== targetIng));
   };
 
   const addIngredient = () => {
     setIngredients((prev) => [...prev, { name: "", grams: 0, isFlour: false }]);
   };
+
+  // Ensure water ingredient exists and is placed first in the list
+  const sortedIngredients = useMemo(() => {
+    const waterIndex = ingredients.findIndex((i) => i.isWater);
+    if (waterIndex === -1) {
+      // If no water ingredient exists, prepend a default water ingredient
+      return [{ name: "Water", grams: 0, isWater: true }, ...ingredients];
+    }
+    if (waterIndex === 0) {
+      return ingredients;
+    }
+    // Move water ingredient to the front
+    const water = ingredients[waterIndex];
+    const rest = ingredients.filter((_, i) => i !== waterIndex);
+    return [water, ...rest];
+  }, [ingredients]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -68,10 +96,10 @@ export default function BreadCalculator() {
       <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
         <h2 className="mb-4 text-lg font-semibold text-stone-800 dark:text-stone-200">Ingredients</h2>
         <IngredientTable
-          ingredients={ingredients}
+          ingredients={sortedIngredients}
           multiplier={multiplier}
-          onUpdate={updateIngredient}
-          onRemove={removeIngredient}
+          onUpdate={updateIngredientByRef}
+          onRemove={removeIngredientByRef}
           onAdd={addIngredient}
         />
       </section>
@@ -99,7 +127,7 @@ export default function BreadCalculator() {
         <ExportPanel
           name={name}
           description={description}
-          ingredients={ingredients}
+          ingredients={sortedIngredients}
           onNameChange={setName}
           onDescriptionChange={setDescription}
         />
