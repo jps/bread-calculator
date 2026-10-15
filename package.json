@@ -20,5 +20,10 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/prismjs": "^1.26.6",
+    "prism-themes": "^1.9.0",
+    "prismjs": "^1.30.0"
   }
 }
