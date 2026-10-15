@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import Prism from "prismjs";
+import "prismjs/components/prism-json";
 import type { Ingredient, Recipe } from "../types";
 
 interface Props {
@@ -44,6 +46,13 @@ export default function ExportPanel({
   const [copied, setCopied] = useState(false);
   const json = buildRecipeJson(name, description, ingredients);
 
+  const highlightedJson = useMemo(() => {
+    if (Prism.languages.json) {
+      return Prism.highlight(json, Prism.languages.json, "json");
+    }
+    return json;
+  }, [json]);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(json);
@@ -85,8 +94,11 @@ export default function ExportPanel({
         </div>
       </div>
 
-      <pre className="max-h-64 overflow-auto rounded-lg bg-stone-900 p-4 text-xs leading-relaxed text-stone-100 dark:bg-stone-950 dark:ring-1 dark:ring-stone-800">
-        <code>{json}</code>
+      <pre className="language-json max-h-64 overflow-auto rounded-lg p-4 text-xs leading-relaxed">
+        <code
+          className="language-json"
+          dangerouslySetInnerHTML={{ __html: highlightedJson }}
+        />
       </pre>
 
       <div className="flex items-center gap-3">
