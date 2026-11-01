@@ -12,8 +12,8 @@
       ]
     },
     {
-      "id": "overnight-country-brown",
-      "name": "Overnight Country Brown",
+      "id": "overnight-brown-bread",
+      "name": "Overnight Brown Bread",
       "description": "Ken Forkish style — 90% white / 10% whole wheat, ~2 loaves",
       "ingredients": [
         { "name": "Water (32°C)", "grams": 780, "isWater": true },
@@ -21,6 +21,18 @@
         { "name": "Whole wheat flour", "grams": 100, "isFlour": true },
         { "name": "Fine sea salt", "grams": 21 },
         { "name": "Instant yeast", "grams": 1 }
+      ]
+    },
+    {
+      "id": "overnight-country-brown-pure-levain",
+      "name": "Overnight Country Brown (Pure Levain)",
+      "description": "Ken Forkish pure levain — ~69% white / 31% whole wheat, ~2 loaves",
+      "ingredients": [
+        { "name": "Water (32°C)", "grams": 684, "isWater": true },
+        { "name": "White flour", "grams": 600, "isFlour": true },
+        { "name": "Whole wheat flour", "grams": 275, "isFlour": true },
+        { "name": "Fine sea salt", "grams": 22 },
+        { "name": "Levain (100% hydration)", "grams": 216 }
       ]
     },
     {
@@ -37,7 +49,7 @@
     },
     {
       "id": "overnight-country-blonde",
-      "name": "Overnight Country Blonde",
+      "name": "Overnight Country Blond (Pure Levain)",
       "description": "Ken Forkish pure levain — ~90% white / 5% rye / 3% whole wheat, ~2 loaves",
       "ingredients": [
         { "name": "Water (32°C)", "grams": 684, "isWater": true },
