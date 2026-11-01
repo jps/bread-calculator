@@ -7,9 +7,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  // Deployed to GitHub Pages as a project site.
-  site: 'https://jps.github.io',
-  base: '/bread-calculator',
+  // Deployed to GitHub Pages with custom domain.
+  site: 'https://bread.jspenc.com',
 
   integrations: [react()],
 
